@@ -9,7 +9,8 @@ var express = require('express'),
   http = require('http'),
   path = require('path'),
   passport = require('passport'), 
-  GoogleStrategy = require('passport-google').Strategy;
+  GoogleStrategy = require('passport-google').Strategy,
+  config = require('./config');
 
 var app = module.exports = express();
 
@@ -18,9 +19,6 @@ var app = module.exports = express();
  * Configuration
  */
 
-// Custom config files
-var config = { };
-config.oauth = require('./config/oauth');
 
 // OAuth
 passport.serializeUser(function(user, done) {
@@ -43,7 +41,7 @@ passport.use(new GoogleStrategy({
 ));
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', config.port);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.logger('dev'));
@@ -51,7 +49,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.cookieParser());
-app.use(express.session({secret: 'H43jld43Kjlda923'}));
+app.use(express.session({secret: config.sessionSecret}));
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
 app.use(passport.initialize());
