@@ -5,10 +5,10 @@ block body
 		h2 Hello {{name}}
 		if user != undefined
 			p You are logged in as: #{ user.identifier } 
-				a(href='account/logout') Logout
+				a(href='/account/logout',target='_self') Logout
 		else
 			p Not logged in	
-				a(href='account/login',target='_self') Log In
+				a(href='/account/login',target='_self') Log In
 		ul.menu
 			li
 				a(href='view1') view1

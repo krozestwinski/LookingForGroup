@@ -5,6 +5,7 @@
   "dependencies": {
     "express": "~3.2.6",
     "jade": "~0.31.2",
-    "passport": "~0.1.17"
+    "passport": "~0.1.17", 
+    "passport-google": "~0.3.0"
   }
 }
